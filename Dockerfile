@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& apt-get purge --auto-remove -y curl gnupg
 
-RUN xhost +localhost
+RUN export DISPLAY=:0
 
 ADD git-push /usr/local/bin/
 
