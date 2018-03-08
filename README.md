@@ -31,3 +31,6 @@ Breakdown
 ---------
 Above example code will basically open an SSH tunnel, push the Gitlab repo to a 
 remote server, and then connect to it to run some Behat tests.
+
+Please note that `$USER`, `$REMOTE` and `$PROJECT` are variables you need to set in the
+CI/CD environment variables section. So just don't copy paste this example :-)
