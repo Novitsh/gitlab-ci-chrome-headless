@@ -6,7 +6,16 @@ RUN apt-get update && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
 	xvfb \
+	xorg \
+	gtk2-engines-pixbuf \
+	dbus-x11 \
+	xfonts-base \
+	xfonts-100dpi \
+	xfonts-75dpi \
+	xfonts-cyrillic \
+	xfonts-scalable \
 	imagemagick \
+	x11-apps \
 	ssh \
 	openssh-client \
 	git \
