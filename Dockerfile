@@ -6,16 +6,7 @@ RUN apt-get update && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
 	xvfb \
-	xorg \
-	gtk2-engines-pixbuf \
-	dbus-x11 \
-	xfonts-base \
-	xfonts-100dpi \
-	xfonts-75dpi \
-	xfonts-cyrillic \
-	xfonts-scalable \
 	imagemagick \
-	x11-apps \
 	ssh \
 	openssh-client \
 	git \
@@ -29,11 +20,7 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& apt-get purge --auto-remove -y curl gnupg
 
-RUN export DISPLAY=:0
-
 ADD git-push /usr/local/bin/
-
-RUN wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
 
 # Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
@@ -44,5 +31,8 @@ USER chrome
 
 # Expose port 9222
 EXPOSE 9222
+
+RUN export DISPLAY=:0
+RUN wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
 
 CMD xvfb-run -e /dev/stdout --server-args='-screen 0, 1024x768x16' google-chrome-stable --headless --disable-gpu --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222
