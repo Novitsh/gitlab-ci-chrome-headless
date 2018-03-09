@@ -27,13 +27,15 @@ RUN apt-get update && apt-get install -y \
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
 
+ADD git-push /usr/local/bin/
+RUN chmod u+x /usr/local/bin/git-push
+RUN chown chrome:chrome /usr/local/bin/git-push
+
 # Run Chrome non-privileged
 USER chrome
 
 # Expose port 9222
 EXPOSE 9222
-
-ADD git-push /usr/local/bin/
 
 RUN export DISPLAY=:0
 RUN wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
