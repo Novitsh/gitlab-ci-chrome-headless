@@ -23,8 +23,6 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& apt-get purge --auto-remove -y curl gnupg
 
-ADD git-push /usr/local/bin/
-
 # Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
@@ -34,6 +32,8 @@ USER chrome
 
 # Expose port 9222
 EXPOSE 9222
+
+ADD git-push /usr/local/bin/
 
 RUN export DISPLAY=:0
 RUN wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
