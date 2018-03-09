@@ -36,3 +36,12 @@ remote server, and then connect to it to run some Behat tests.
 
 Please note that `$USER`, `$REMOTE` and `$PROJECT` are variables you need to set in the
 CI/CD environment variables section. So just don't copy paste this example :-)
+
+SSH Tunnel
+----------
+A tunnel is needed for behat (which is running on a remote server) to access
+Chrome (which is running in this container).
+
+The -R flag specifies that connections to the given TCP port or Unix socket on 
+the remote (server) host are to be forwarded to the local side.
+Read all info on man ssh for the -R flag.
