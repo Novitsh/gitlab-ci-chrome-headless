@@ -29,7 +29,6 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& apt-get purge --auto-remove -y curl gnupg
 
-RUN nohup Xvfb :0 > /dev/null 2>&1 &
 RUN export DISPLAY=:0
 
 ADD git-push /usr/local/bin/
@@ -46,6 +45,4 @@ USER chrome
 # Expose port 9222
 EXPOSE 9222
 
-# Autorun chrome headless with no GPU
-ENTRYPOINT [ "google-chrome-stable" ]
-CMD [ "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222" ]
+CMD xvfb-run -e /dev/stdout --server-args='-screen 0, 1024x768x16' google-chrome-stable --headless --disable-gpu --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222
