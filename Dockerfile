@@ -5,6 +5,7 @@ FROM debian:sid
 RUN apt-get update && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
+	xvfb \
 	ssh \
 	openssh-client \
 	git \
@@ -18,6 +19,7 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& apt-get purge --auto-remove -y curl gnupg
 
+RUN nohup Xvfb :0 > /dev/null 2>&1 &
 RUN export DISPLAY=:0
 
 ADD git-push /usr/local/bin/
@@ -36,4 +38,4 @@ EXPOSE 9222
 
 # Autorun chrome headless with no GPU
 ENTRYPOINT [ "google-chrome-stable" ]
-CMD [ "--headless", "--no-sandbox", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222" ]
+CMD [ "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222" ]
