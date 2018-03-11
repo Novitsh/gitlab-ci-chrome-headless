@@ -4,6 +4,9 @@ GitLab CI - Chrome headless
 This project allows you to work with GitLab CI and use a container that can both 
 git push to an origin and allow you to run a headless chrome.
 
+Although it can be used with different CI tools,
+it was originally created and tested with GitLab CI only.
+
 Build is tested with: `Google Chrome 65.0.3325.146`
 
 This is useful when you have another external git repository hosting your codebase of
