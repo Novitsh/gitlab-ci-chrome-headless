@@ -40,4 +40,4 @@ EXPOSE 9222
 RUN export DISPLAY=:0
 RUN wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
 
-CMD xvfb-run -e /dev/stdout --server-args='-screen 0, 1024x768x16' google-chrome-stable --headless --disable-gpu --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222
+CMD xvfb-run -e /dev/stdout --server-args='-screen 0, 1024x768x16' google-chrome-stable --headless --disable-gpu --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 --enable-logging=stderr --v=1
