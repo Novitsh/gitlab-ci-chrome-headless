@@ -48,3 +48,17 @@ Chrome (which is running in this container).
 The -R flag specifies that connections to the given TCP port or Unix socket on 
 the remote (server) host are to be forwarded to the local side.
 Read all info on man ssh for the -R flag.
+
+Running the container locally
+-----------------------------
+You can run this container locally with Docker. You will however need to specify the 
+`--cap-add=SYS_ADMIN` or `--privileged` flag in order to run Chrome (this is due to how Chrome works).
+
+Please note
+-----------
+A known issue in Gitlab requires you to invoke the startup script
+manually. You can do so by adding
+
+    - xvfb-run -e /dev/stdout --server-args='-screen 0, 1024x768x16' google-chrome-stable --headless --disable-gpu --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 &
+    
+to the before_script section in your gitlab_ci.yml file.
